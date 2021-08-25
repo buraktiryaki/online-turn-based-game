@@ -479,11 +479,14 @@ void MainClient::processInput()
 
 void MainClient::cbFrameBufferSize(int width, int height)
 {
-    m_scrWidth = width;
-    m_scrHeight = height;
-    glViewport(0, 0, m_scrWidth, m_scrHeight);
-
-    m_picker.resize(m_scrWidth, m_scrHeight);
+    //width, height = 0 when minimize wnd on windows
+    if (width != 0 && height != 0)
+    {
+        m_scrWidth = width;
+        m_scrHeight = height;
+        glViewport(0, 0, m_scrWidth, m_scrHeight);
+        m_picker.resize(m_scrWidth, m_scrHeight);
+    }
 }
 
 void MainClient::cbMouse(double xpos, double ypos)
